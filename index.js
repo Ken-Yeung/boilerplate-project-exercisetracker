@@ -124,7 +124,7 @@ app.route("/api/users/:_id/logs").get(async function (req, res) {
   }
 
   // Filter by Limit
-  if (!!_limit && !isNaN(parseInt(parseInt))) {
+  if (!!_limit && !isNaN(parseInt(_limit))) {
     findAllExcercise = findAllExcercise.slice(0, parseInt(_limit))
   }
 
