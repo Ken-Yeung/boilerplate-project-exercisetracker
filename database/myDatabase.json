@@ -1,0 +1,17 @@
+{
+    "users": [
+        {
+            "username": "hello",
+            "_id": "e92e287d-ae61-40c5-85d0-09b29ca60c3d"
+        }
+    ],
+    "exercises": [
+        {
+            "username": "hello",
+            "description": "Hello World",
+            "duration": 9,
+            "date": "Tue Mar 19 2024",
+            "_id": "e92e287d-ae61-40c5-85d0-09b29ca60c3d"
+        }
+    ]
+}
