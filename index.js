@@ -74,7 +74,7 @@ app.route("/api/users/:_id/exercises").post(async function (req, res) {
   formData.username = _user.username
   formData.description = _data.description
   formData.duration = parseInt(_data.duration)
-  formData.date = (!!!_data.date || _data.date.trim() == "") ? new Date().toDateString() : _data.date
+  formData.date = (!!!_data.date || _data.date.trim() == "") ? new Date().toDateString() : new Date(_data.date).toDateString()
 
   // Save Data
   await db.push(_userExercisePath, [..._excerciseDB, formData])
@@ -135,6 +135,13 @@ app.route("/api/users/:_id/logs").get(async function (req, res) {
   respTemp._id = _user._id
   respTemp.log = findAllExcercise // Need Cut Some Keys
 
+  console.log("-".repeat(33));
+  console.log(req.path);
+  console.log("_from", _from);
+  console.log("_to", _to);
+  console.log("_limit", _limit);
+  console.log("respTemp:", respTemp);
+  console.log("-".repeat(33));
   res.send(respTemp)
 
 })
