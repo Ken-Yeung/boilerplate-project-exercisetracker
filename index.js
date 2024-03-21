@@ -50,6 +50,7 @@ app.route("/api/users").post(async function (req, res) {
   const _userDB = await tryGetData(_userDBPath)
   res.send(_userDB)
 })
+
 // POST: Excercise
 app.route("/api/users/:_id/exercises").post(async function (req, res) {
   const _userDB = await tryGetData(_userDBPath)
@@ -64,7 +65,7 @@ app.route("/api/users/:_id/exercises").post(async function (req, res) {
   // Find User First
   const _user = _userDB.find((_) => _._id === _uid)
   if (!!!_user) {
-    console.log("User Not Found");
+    // console.log("User Not Found");
     return res.status(404).send({ error: "Not Found" })
   }
 
@@ -98,7 +99,6 @@ app.route("/api/users/:_id/logs").get(async function (req, res) {
   const _user = _userDB.find((_) => _._id === _uid)
   if (!!!_user) return res.status(404).send({ error: "Not Found" })
 
-
   // Get User's Excercise
   let findAllExcercise = _excerciseDB.filter((_) => _._id === _user._id).map((_) => {
     const _t = { ...tLogInfo }
@@ -116,10 +116,10 @@ app.route("/api/users/:_id/logs").get(async function (req, res) {
     _from = new Date(_from)
     _to = new Date(_to)
 
-    console.log("_from:", _from);
-    console.log("_to:", _to);
+    // console.log("_from:", _from);
+    // console.log("_to:", _to);
 
-    findAllExcercise.filter((_) => _from.getTime() <= (new Date(_.date)).getTime() <= _to.getTime())
+    findAllExcercise = findAllExcercise.filter((_) => _from.getTime() <= (new Date(_.date)).getTime() <= _to.getTime())
 
   }
 
@@ -135,17 +135,16 @@ app.route("/api/users/:_id/logs").get(async function (req, res) {
   respTemp._id = _user._id
   respTemp.log = findAllExcercise // Need Cut Some Keys
 
-  console.log("-".repeat(33));
-  console.log(req.path);
-  console.log("_from", _from);
-  console.log("_to", _to);
-  console.log("_limit", _limit);
-  console.log("respTemp:", respTemp);
-  console.log("-".repeat(33));
+  // console.log("-".repeat(33));
+  // console.log(req.path);
+  // console.log("_from", _from);
+  // console.log("_to", _to);
+  // console.log("_limit", _limit);
+  // console.log("respTemp:", respTemp);
+  // console.log("-".repeat(33));
   res.send(respTemp)
 
 })
-
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
