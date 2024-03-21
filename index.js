@@ -56,14 +56,17 @@ app.route("/api/users/:_id/exercises").post(async function (req, res) {
   const _excerciseDB = await tryGetData(_userExercisePath)
 
   const _uid = req.params._id
-  const _data = req.body
   // description
   // duration
   // date? -> Default Current Date
+  const _data = req.body
 
   // Find User First
   const _user = _userDB.find((_) => _._id === _uid)
-  if (!!!_user) return res.status(404).send({ error: "Not Found" })
+  if (!!!_user) {
+    console.log("User Not Found");
+    return res.status(404).send({ error: "Not Found" })
+  }
 
   // Form Data
   const formData = { ...tExcercise }
@@ -131,6 +134,8 @@ app.route("/api/users/:_id/logs").get(async function (req, res) {
   respTemp.count = findAllExcercise.length
   respTemp._id = _user._id
   respTemp.log = findAllExcercise // Need Cut Some Keys
+
+  res.send(respTemp)
 
 })
 
